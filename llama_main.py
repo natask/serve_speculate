@@ -3,11 +3,17 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from vllm import LLM, SamplingParams
 import uvicorn
+import time
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
+HUGGINGFACE_HUB_API_TOKEN = os.getenv("HUGGINGFACE_HUB_API_TOKEN")
+login(token = HUGGINGFACE_HUB_API_TOKEN)
 app = FastAPI(title="Serve Speculate")
 
 # Initialize vLLM
-llm = LLM(model="casperhansen/llama-3.3-70b-instruct-awq")
+llm = LLM(model="meta-llama/Llama-3.1-8B-Instruct")
 
 class ChatMessage(BaseModel):
     role: str
@@ -84,4 +90,4 @@ async def create_chat_completion(request: ChatCompletionRequest):
     )
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=6050, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=10050, reload=True)
