@@ -36,6 +36,28 @@ class ChatCompletionResponse(BaseModel):
     choices: List[ChatChoice]
     usage: Dict[str, int]
 
+class ModelData(BaseModel):
+    id: str
+    object: str = "model"
+    owned_by: str = "organization"
+    model: str
+
+class ModelsResponse(BaseModel):
+    object: str = "list"
+    data: List[ModelData]
+
+@app.get("/v1/models", response_model=ModelsResponse)
+async def list_models():
+    model_name = llm.model_config.model
+    return ModelsResponse(
+        data=[
+            ModelData(
+                id=model_name,
+                model=llm.model_config.model
+            )
+        ]
+    )
+
 @app.post("/v1/chat/completions", response_model=ChatCompletionResponse)
 async def create_chat_completion(request: ChatCompletionRequest):
     # Convert chat messages to prompt
@@ -74,7 +96,7 @@ async def create_chat_completion(request: ChatCompletionRequest):
     return ChatCompletionResponse(
         id=f"chatcmpl-{outputs[0].request_id}",
         created=outputs[0].request_id,
-        model=request.model,
+        model=llm.model_config.model,
         choices=choices,
         usage={
             "prompt_tokens": prompt_tokens,

@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 from vllm import LLM, SamplingParams
 import uvicorn
 import time
+from huggingface_hub import login
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -41,6 +42,28 @@ class ChatCompletionResponse(BaseModel):
     model: str
     choices: List[ChatChoice]
     usage: Dict[str, int]
+
+class ModelData(BaseModel):
+    id: str
+    object: str = "model"
+    owned_by: str = "organization"
+    model: str
+
+class ModelsResponse(BaseModel):
+    object: str = "list"
+    data: List[ModelData]
+
+@app.get("/v1/models", response_model=ModelsResponse)
+async def list_models():
+    model_name = llm.model_config.model
+    return ModelsResponse(
+        data=[
+            ModelData(
+                id=model_name,
+                model=llm.model_config.model
+            )
+        ]
+    )
 
 @app.post("/v1/chat/completions", response_model=ChatCompletionResponse)
 async def create_chat_completion(request: ChatCompletionRequest):
