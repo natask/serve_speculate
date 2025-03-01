@@ -5,6 +5,7 @@ from vllm import LLM, SamplingParams
 import uvicorn
 import time
 import os
+from huggingface_hub import login
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -16,7 +17,7 @@ app = FastAPI(title="Serve Speculate")
 # Initialize vLLM
 llm = LLM(
     model="casperhansen/llama-3.3-70b-instruct-awq",
-    speculative_model="JackFram/llama-68m", # The draft model. Must have same vocabulary as target model.
+    speculative_model="meta-llama/Llama-3.1-8B-Instruct", # The draft model. Must have same vocabulary as target model.
     tensor_parallel_size=4,
     speculative_model_uses_tp_1=True, # Whether the draft model should use TP=1 or same TP as target model.
     num_speculative_tokens=3, # The number of speculative tokens to score.
