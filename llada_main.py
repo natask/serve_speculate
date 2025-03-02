@@ -8,7 +8,7 @@ app = FastAPI(title="Serve Speculate")
 
 # Initialize vLLM
 llm = LLM(model="GSAI-ML/LLaDA-8B-Instruct",gpu_memory_utilization=1,
-max_model_len=100000, trust_remote_code=True)
+max_model_len=70000, trust_remote_code=True)
 
 class ChatMessage(BaseModel):
     role: str
