@@ -8,7 +8,7 @@ app = FastAPI(title="Serve Speculate")
 
 # Initialize vLLM
 llm = LLM(model="casperhansen/llama-3.3-70b-instruct-awq", 
-    gpu_memory_utilization=1,
+    gpu_memory_utilization=0.8,
      tensor_parallel_size=1,
      dtype="bfloat16",
      enforce_eager=True,
