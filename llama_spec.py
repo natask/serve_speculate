@@ -21,7 +21,7 @@ llm = LLM(
     tensor_parallel_size=4,
     num_speculative_tokens=3, # The number of speculative tokens to score.
     gpu_memory_utilization=1,
-    max_model_len=70000,
+    max_model_len=10000,
 )
 
 class ChatMessage(BaseModel):

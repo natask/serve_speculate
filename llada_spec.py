@@ -9,13 +9,13 @@ app = FastAPI(title="Serve Speculate")
 
 # Initialize vLLM
 llm = LLM(
-    model="llama-3.3-70b-instruct-awq",
-    speculative_model="HarshilAvlani/LLaDA_Aligned_1", # The draft model. Must have same vocabulary as target model.
+    model="casperhansen/llama-3.3-70b-instruct-awq",
+    speculative_model="HarshilAvlani/LLaDA_Aligned", # The draft model. Must have same vocabulary as target model.
     tensor_parallel_size=4,
     num_speculative_tokens=3, # The number of speculative tokens to score.
     gpu_memory_utilization=1,
     trust_remote_code=True,
-max_model_len=70000
+max_model_len=10000
 )
 
 class ChatMessage(BaseModel):
