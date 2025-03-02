@@ -7,7 +7,9 @@ import uvicorn
 app = FastAPI(title="Serve Speculate")
 
 # Initialize vLLM
-llm = LLM(model="casperhansen/llama-3.3-70b-instruct-awq")
+llm = LLM(model="casperhansen/llama-3.3-70b-instruct-awq", 
+    gpu_memory_utilization=1,
+max_model_len=100000)
 
 class ChatMessage(BaseModel):
     role: str

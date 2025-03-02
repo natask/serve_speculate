@@ -12,8 +12,10 @@ llm = LLM(
     model="llama-3.3-70b-instruct-awq",
     speculative_model="GSAI-ML/LLaDA-8B-Instruct", # The draft model. Must have same vocabulary as target model.
     tensor_parallel_size=4,
-    speculative_model_uses_tp_1=True, # Whether the draft model should use TP=1 or same TP as target model.
     num_speculative_tokens=3, # The number of speculative tokens to score.
+    gpu_memory_utilization=1,
+    trust_remote_code=True,
+max_model_len=100000
 )
 
 class ChatMessage(BaseModel):

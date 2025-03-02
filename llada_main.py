@@ -7,7 +7,8 @@ import uvicorn
 app = FastAPI(title="Serve Speculate")
 
 # Initialize vLLM
-llm = LLM(model="GSAI-ML/LLaDA-8B-Instruct")
+llm = LLM(model="GSAI-ML/LLaDA-8B-Instruct",gpu_memory_utilization=1,
+max_model_len=100000, trust_remote_code=True)
 
 class ChatMessage(BaseModel):
     role: str
@@ -106,4 +107,4 @@ async def create_chat_completion(request: ChatCompletionRequest):
     )
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=10050, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=9050, reload=True)

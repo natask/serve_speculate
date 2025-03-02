@@ -14,7 +14,9 @@ login(token = HUGGINGFACE_HUB_API_TOKEN)
 app = FastAPI(title="Serve Speculate")
 
 # Initialize vLLM
-llm = LLM(model="meta-llama/Llama-3.1-8B-Instruct")
+llm = LLM(model="meta-llama/Llama-3.1-8B-Instruct",
+    gpu_memory_utilization=1,
+max_model_len=100000)
 
 class ChatMessage(BaseModel):
     role: str
