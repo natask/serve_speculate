@@ -9,7 +9,7 @@ app = FastAPI(title="Serve Speculate")
 # Initialize vLLM
 llm = LLM(model="casperhansen/llama-3.3-70b-instruct-awq", 
     gpu_memory_utilization=1,
-max_model_len=70000)
+max_model_len=10000)
 
 class ChatMessage(BaseModel):
     role: str

@@ -11,7 +11,7 @@ app = FastAPI(title="Serve Speculate")
 llm = LLM(
     model="casperhansen/llama-3.3-70b-instruct-awq",
     speculative_model="HarshilAvlani/LLaDA_Aligned", # The draft model. Must have same vocabulary as target model.
-    tensor_parallel_size=4,
+    tensor_parallel_size=1,
     num_speculative_tokens=3, # The number of speculative tokens to score.
     gpu_memory_utilization=1,
     trust_remote_code=True,
