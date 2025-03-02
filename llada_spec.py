@@ -15,7 +15,7 @@ llm = LLM(
     num_speculative_tokens=3, # The number of speculative tokens to score.
     gpu_memory_utilization=1,
     trust_remote_code=True,
-max_model_len=10000
+max_model_len=1000
 )
 
 class ChatMessage(BaseModel):

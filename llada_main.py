@@ -7,8 +7,7 @@ import uvicorn
 app = FastAPI(title="Serve Speculate")
 
 # Initialize vLLM
-llm = LLM(model="HarshilAvlani/LLaDA_Aligned",gpu_memory_utilization=1,
-max_model_len=5000,  tensor_parallel_size=1, trust_remote_code=True)
+llm = LLM(model="HarshilAvlani/LLaDA_Aligned",gpu_memory_utilization=1,  tensor_parallel_size=1, trust_remote_code=True)
 
 class ChatMessage(BaseModel):
     role: str
