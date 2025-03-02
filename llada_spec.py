@@ -10,7 +10,7 @@ app = FastAPI(title="Serve Speculate")
 # Initialize vLLM
 llm = LLM(
     model="llama-3.3-70b-instruct-awq",
-    speculative_model="GSAI-ML/LLaDA-8B-Instruct", # The draft model. Must have same vocabulary as target model.
+    speculative_model="HarshilAvlani/LLaDA_Aligned_1", # The draft model. Must have same vocabulary as target model.
     tensor_parallel_size=4,
     num_speculative_tokens=3, # The number of speculative tokens to score.
     gpu_memory_utilization=1,
